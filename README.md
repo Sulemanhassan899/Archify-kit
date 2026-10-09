@@ -130,3 +130,14 @@ Script: `tools/plan-archify-agents.sh`
 - No `credentials.local.yaml` in git  
 - `registry.local.yaml` is gitignored (machine paths)  
 - Product app repos stay read-only during Archify
+
+---
+
+## Prefer the combined repo
+
+**Cursor-kits** (QA + Archify together, one wake):
+
+https://github.com/Sulemanhassan899/Cursor-kits
+
+QA wake automatically runs Archify and opens Live Guide. No separate Archify command.
+
