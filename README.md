@@ -78,17 +78,14 @@ On your machine, wake Archify from the Obecno app workspace; resolve should poin
 
 Local `127.0.0.1` is only for you.
 
-To share:
-
-1. Push this repo to GitHub (already set up).
-2. Repo **Settings → Pages → Source: GitHub Actions**.
-3. After the workflow runs, open:
+**Public site (GitHub Pages):**
 
 ```text
+https://sulemanhassan899.github.io/Archify-kit/
 https://sulemanhassan899.github.io/Archify-kit/projects/obecno/live-guide/
 ```
 
-Full steps: [docs/HOSTING.md](./docs/HOSTING.md)
+Pages is deployed from the `gh-pages` branch. Full steps: [docs/HOSTING.md](./docs/HOSTING.md)
 
 ---
 
