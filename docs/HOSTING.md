@@ -1,96 +1,84 @@
 # Make Archify Live Guide shareable (GitHub)
 
 Local Live Guide (`http://127.0.0.1:8765`) works only on **your** machine.  
-To share a URL with others, publish static files with **GitHub Pages**.
+To share a URL with others, use **GitHub Pages**.
 
 ---
 
-## Option A — GitHub Pages (recommended, free)
+## Fast path (already set up for this repo)
 
-### 1) This repo already has a Pages workflow
+1. Open: https://github.com/Sulemanhassan899/Archify-kit/settings/pages  
+2. Under **Build and deployment**:
+   - Source: **Deploy from a branch**
+   - Branch: **gh-pages** / **/ (root)**
+3. Save.
 
-File: `.github/workflows/pages.yml`
-
-It publishes:
-- kit docs + Live Guide template
-- every project under `projects/<name>/` (diagrams + live-guide HTML)
-
-### 2) Turn on Pages in GitHub
-
-1. Open https://github.com/Sulemanhassan899/Archify-kit  
-2. **Settings → Pages**  
-3. Source: **GitHub Actions**  
-4. Push to `main` (or re-run the workflow)
-
-### 3) Your public URLs
-
-After the workflow is green:
+After a minute or two, open:
 
 ```text
 https://sulemanhassan899.github.io/Archify-kit/
 https://sulemanhassan899.github.io/Archify-kit/projects/obecno/live-guide/
 ```
 
-Architecture HTML files are also under:
-
-```text
-https://sulemanhassan899.github.io/Archify-kit/projects/obecno/<architecture-folder>/...
-```
-
-### 4) What others can see
-
-| Works on Pages | Needs your local server |
-|----------------|-------------------------|
-| Architecture HTML / diagrams | Live SSE “watching disk” |
-| Static Live Guide UI | Excel API / live QA polling against local files |
-| Manifest + iframes | Writing new QA results |
-
-For a **demo share link**, Pages is enough (architecture tab).  
-For **live QA while testing**, keep using localhost on your Mac.
+The `gh-pages` branch is a static copy of diagrams + Live Guide UI (safe to share).
 
 ---
 
-## Option B — Publish only one project
+## Update the public site after new diagrams
+
+From your Mac:
 
 ```bash
-# From Archify-kit
-git add projects/my-app
-git commit -m "Add my-app archify"
-git push
+cd ~/Documents/Archify-kit
+# (optional) regenerate _site then force-push gh-pages — or ask the agent:
+# "publish archify live guide to github pages"
+git push origin main
 ```
 
-Pages redeploys automatically. Share:
-
-```text
-https://sulemanhassan899.github.io/Archify-kit/projects/my-app/live-guide/
-```
-
-Update that project’s `manifest.json` so `architecture_entry` is a **relative** path that works on Pages (same as local).
+Then refresh the `gh-pages` branch contents (agent/tools can rebuild it) and push `gh-pages` again.
 
 ---
 
-## Option C — Custom domain (optional)
+## What others can see vs what stays local
 
-In repo **Settings → Pages → Custom domain**, add e.g. `archify.yourdomain.com`,  
-then create a DNS CNAME to `sulemanhassan899.github.io`.
+| On GitHub Pages (shareable) | On your Mac only (localhost:8765) |
+|-----------------------------|-----------------------------------|
+| Architecture HTML / diagrams | Live file-watching (SSE) |
+| Static Live Guide UI | Live QA Excel APIs against disk |
+| Manifest + iframes | Writing new QA results while testing |
 
 ---
 
-## Option D — Always-on server (advanced)
+## Option: GitHub Actions
 
-If you need real live QA APIs for remote teammates:
+There is also `.github/workflows/pages.yml`.  
+If your GitHub token has the `workflow` scope, Actions can deploy automatically on every `main` push.  
+Otherwise use the **gh-pages branch** method above (no special token needed).
 
-1. Run `node live-guide/server.mjs` on a VPS (DigitalOcean, Fly.io, Railway, etc.)
-2. Set `ARCHIFY_ROOT` + `PORT`
-3. Put HTTPS in front (Caddy / nginx)
-4. Share `https://your-server/live-guide/`
+To add workflow scope (optional):
 
-GitHub Pages cannot run that Node watch server; use a VPS for true live mode.
+```bash
+gh auth refresh -h github.com -s repo,workflow
+```
+
+---
+
+## Custom domain (optional)
+
+Settings → Pages → Custom domain → e.g. `archify.yourdomain.com`  
+DNS CNAME → `sulemanhassan899.github.io`
+
+---
+
+## Always-on live server (advanced)
+
+For real live QA APIs for remote teammates, run `node live-guide/server.mjs` on a VPS with HTTPS.  
+GitHub Pages cannot run that Node watch server.
 
 ---
 
 ## Security
 
-- Do **not** commit `credentials.local.yaml` or secrets into Pages.
-- This kit gitignores credentials and `registry.local.yaml`.
-- Review `projects/*/qa/results` before pushing if they contain sensitive notes.
+- Never commit `credentials.local.yaml`
+- `registry.local.yaml` is gitignored
+- Review QA results before publishing if they contain sensitive notes
