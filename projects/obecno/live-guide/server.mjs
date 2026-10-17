@@ -123,16 +123,29 @@ async function loadExcelPreview(runId) {
 
   const abs = path.join(reportsDir, xlsxName);
   let ExcelJS;
+  const exceljsCandidates = [
+    path.join(ROOT, 'qa', 'tools', 'node_modules', 'exceljs', 'excel.js'),
+    // QA_ROOT may live outside ARCHIFY_ROOT (symlink/copy layouts)
+    path.join(ROOT, '..', '..', '..', 'obecno-archify', 'qa', 'tools', 'node_modules', 'exceljs', 'excel.js'),
+    path.resolve(process.env.HOME || '', 'Documents/obecno-archify/qa/tools/node_modules/exceljs/excel.js'),
+  ];
   try {
-    const exceljsEntry = path.join(
-      ROOT,
-      'qa',
-      'tools',
-      'node_modules',
-      'exceljs',
-      'excel.js'
-    );
-    ExcelJS = (await import(pathToFileURL(exceljsEntry).href)).default;
+    let loaded = false;
+    let lastErr;
+    for (const exceljsEntry of exceljsCandidates) {
+      try {
+        if (!(await fileExists(exceljsEntry))) continue;
+        ExcelJS = (await import(pathToFileURL(exceljsEntry).href)).default;
+        loaded = true;
+        break;
+      } catch (err) {
+        lastErr = err;
+      }
+    }
+    if (!loaded) {
+      console.warn('[excel] exceljs unavailable', lastErr?.message || 'no candidate path');
+      return null;
+    }
   } catch (err) {
     console.warn('[excel] exceljs unavailable', err.message);
     return null;
@@ -221,6 +234,20 @@ function excelTitleFromRunTitle(title, runId) {
   return `${base} EXCEL REPORT`;
 }
 
+async function isDirEntry(parentDir, ent) {
+  if (ent.isDirectory()) return true;
+  // readdir Dirent.isDirectory() is false for symlinks — follow them
+  if (ent.isSymbolicLink()) {
+    try {
+      const st = await fsp.stat(path.join(parentDir, ent.name));
+      return st.isDirectory();
+    } catch {
+      return false;
+    }
+  }
+  return false;
+}
+
 async function listRuns() {
   const resultsDir = path.join(ROOT, 'qa', 'results');
   const runs = [];
@@ -228,7 +255,7 @@ async function listRuns() {
 
   const entries = await fsp.readdir(resultsDir, { withFileTypes: true });
   for (const ent of entries) {
-    if (!ent.isDirectory()) continue;
+    if (!(await isDirEntry(resultsDir, ent))) continue;
     if (ent.name.startsWith('.')) continue;
     // Hide demo/sample scaffolding runs from the UI
     if (ent.name === 'sample_run' || ent.name.startsWith('sample_')) continue;

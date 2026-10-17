@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "4efd2d35-4fea-4bbf-a0e5-ffcf4d8d5bb3",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/Users/hassan/Documents/Archify-kit/projects/obecno/architecture-obecno-leaves-20261017-235727/candidate.json",
+  "output": "/Users/hassan/Documents/Archify-kit/projects/obecno/architecture-obecno-leaves-20261017-235727/obecno-leaves.html",
+  "specification": {
+    "sha256": "fd0f234bfaf19251e87b17269606f2c41ced0d3cd4a517c8cd8d856c284825b6",
+    "bytes": 14937
+  },
+  "artifact": {
+    "sha256": "20658134c915798de445b3d440f35b2891cec592056c57dc816de275d9732be1",
+    "bytes": 796585
+  }
+}

@@ -3,26 +3,52 @@
   "diagram_type": "architecture",
   "meta": {
     "title": "Obecno Employee Module Screens",
-    "subtitle": "Bottom tabs, clock / attendance sheets, and More entry",
+    "subtitle": "Bottom tabs, attendance sheets, and leaves hub",
     "output": "employee-screens.html",
     "quality_profile": "showcase",
     "repository": {
       "url": "https://github.com/Sulemanhassan899/obecno.git",
       "provider": "github",
-      "revision": "674dbc537595bdbcaba8142674b813cf27ffe7d2"
+      "revision": "77242d1796dab8196266fe0ccdccf4e0a266687b",
+      "link_mode": "local-only"
     },
     "views": [
       {
         "id": "tabs",
         "label": "Four tabs",
-        "focus": ["employee-nav", "clock", "attendance", "alerts", "more"],
+        "focus": [
+          "employee-nav",
+          "clock",
+          "attendance",
+          "alerts",
+          "more"
+        ],
         "note": "EmployeeBottomNavBar hosts the four primary screens"
       },
       {
         "id": "attendance-detail",
         "label": "Attendance sheets",
-        "focus": ["attendance", "details-sheet", "add-sheet", "holiday-sheet"],
+        "focus": [
+          "attendance",
+          "details-sheet",
+          "add-sheet",
+          "holiday-sheet"
+        ],
         "note": "Day taps open detail / add / holiday bottom sheets"
+      },
+      {
+        "id": "leaves",
+        "label": "Leaves",
+        "focus": [
+          "clock",
+          "leaves-hub",
+          "leave-history",
+          "leave-types",
+          "holidays",
+          "apply-leave",
+          "leave-detail"
+        ],
+        "note": "ClockLeavesCard opens LeavesScreen"
       }
     ]
   },
@@ -32,60 +58,116 @@
       "type": "frontend",
       "label": "Employee shell",
       "sublabel": "/employee_nav",
-      "pos": [520, 300],
-      "size": [148, 64],
+      "pos": [
+        700,
+        280
+      ],
+      "size": [
+        148,
+        64
+      ],
       "tag": "bottom nav",
-      "sources": [{ "path": "lib/widgets/bottom_nav_bars/employee_nav.dart", "line": 44, "end_line": 50, "label": "tab screens" }]
+      "sources": [
+        {
+          "path": "lib/widgets/bottom_nav_bars/employee_nav.dart",
+          "line": 44,
+          "end_line": 50,
+          "label": "tab screens"
+        }
+      ]
     },
     {
       "id": "clock",
       "type": "frontend",
       "label": "Clock",
-      "sublabel": "tab 0 · punch in/out",
-      "pos": [180, 140],
-      "size": [140, 64]
+      "sublabel": "tab 0 \u00b7 punch in/out",
+      "pos": [
+        420,
+        120
+      ],
+      "size": [
+        140,
+        64
+      ]
     },
     {
       "id": "attendance",
       "type": "frontend",
       "label": "Attendance",
-      "sublabel": "tab 1 · history",
-      "pos": [400, 140],
-      "size": [140, 64]
+      "sublabel": "tab 1 \u00b7 history",
+      "pos": [
+        620,
+        120
+      ],
+      "size": [
+        140,
+        64
+      ]
     },
     {
       "id": "alerts",
       "type": "frontend",
       "label": "Alerts",
-      "sublabel": "tab 2 · inbox",
-      "pos": [620, 140],
-      "size": [140, 64]
+      "sublabel": "tab 2 \u00b7 inbox",
+      "pos": [
+        820,
+        120
+      ],
+      "size": [
+        140,
+        64
+      ]
     },
     {
       "id": "more",
       "type": "frontend",
       "label": "More",
-      "sublabel": "tab 3 · profile hub",
-      "pos": [840, 140],
-      "size": [140, 64]
+      "sublabel": "tab 3 \u00b7 profile hub",
+      "pos": [
+        1020,
+        120
+      ],
+      "size": [
+        140,
+        64
+      ]
     },
     {
       "id": "location-sheet",
       "type": "frontend",
       "label": "Location sheet",
       "sublabel": "pick office / GPS",
-      "pos": [180, 460],
-      "size": [140, 62],
+      "pos": [
+        420,
+        460
+      ],
+      "size": [
+        140,
+        62
+      ],
       "tag": "sheet",
-      "sources": [{ "path": "lib/features/clock/presentation/screens/clock_screen.dart", "line": 461, "end_line": 468, "label": "location sheet" }]
+      "sources": [
+        {
+          "path": "lib/features/clock/presentation/screens/clock_screen.dart",
+          "line": 461,
+          "end_line": 468,
+          "label": "location sheet"
+        }
+      ]
     },
     {
       "id": "details-sheet",
       "type": "frontend",
       "label": "Day details",
       "sublabel": "AttendanceDetailsSheet",
-      "pos": [400, 460],
-      "size": [148, 62],
+      "pos": [
+        620,
+        460
+      ],
+      "size": [
+        148,
+        62
+      ],
       "tag": "sheet"
     },
     {
@@ -93,8 +175,14 @@
       "type": "frontend",
       "label": "Add attendance",
       "sublabel": "AddAttendanceBottomSheet",
-      "pos": [620, 460],
-      "size": [156, 62],
+      "pos": [
+        820,
+        460
+      ],
+      "size": [
+        156,
+        62
+      ],
       "tag": "sheet"
     },
     {
@@ -102,8 +190,14 @@
       "type": "frontend",
       "label": "Holiday detail",
       "sublabel": "HolidayBottomSheet",
-      "pos": [840, 460],
-      "size": [140, 62],
+      "pos": [
+        1020,
+        460
+      ],
+      "size": [
+        140,
+        62
+      ],
       "tag": "sheet"
     },
     {
@@ -111,35 +205,259 @@
       "type": "frontend",
       "label": "Month picker",
       "sublabel": "MonthYearPickerSheet",
-      "pos": [400, 580],
-      "size": [148, 62],
+      "pos": [
+        620,
+        580
+      ],
+      "size": [
+        148,
+        62
+      ],
       "tag": "sheet"
-    }
-  ],
-  "boundaries": [
-    {
-      "kind": "region",
-      "label": "Employee bottom navigation",
-      "wraps": ["employee-nav", "clock", "attendance", "alerts", "more"],
-      "pad": 18
     },
     {
-      "kind": "region",
-      "label": "Overlays opened from Clock / Attendance",
-      "wraps": ["location-sheet", "details-sheet", "add-sheet", "holiday-sheet", "month-picker"],
-      "pad": 14
+      "id": "leaves-hub",
+      "type": "frontend",
+      "label": "Leaves hub",
+      "sublabel": "LeavesScreen",
+      "pos": [
+        40,
+        120
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "sources": [
+        {
+          "path": "lib/features/employee_module/leaves/presentation/screens/leaves_screen.dart",
+          "line": 21,
+          "end_line": 48,
+          "label": "LeavesScreen"
+        }
+      ]
+    },
+    {
+      "id": "leave-history",
+      "type": "frontend",
+      "label": "Leave history",
+      "sublabel": "LeaveHistoryScreen",
+      "pos": [
+        40,
+        500
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "sources": [
+        {
+          "path": "lib/features/employee_module/leaves/presentation/screens/leave_history_screen.dart",
+          "line": 1,
+          "end_line": 30,
+          "label": "history"
+        }
+      ]
+    },
+    {
+      "id": "leave-types",
+      "type": "frontend",
+      "label": "Leave types",
+      "sublabel": "LeaveTypesScreen",
+      "pos": [
+        40,
+        620
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "sources": [
+        {
+          "path": "lib/features/employee_module/leaves/presentation/screens/leave_types_screen.dart",
+          "line": 1,
+          "end_line": 25,
+          "label": "types"
+        }
+      ]
+    },
+    {
+      "id": "holidays",
+      "type": "frontend",
+      "label": "Holidays",
+      "sublabel": "HolidaysCalendarScreen",
+      "pos": [
+        220,
+        620
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "sources": [
+        {
+          "path": "lib/features/employee_module/leaves/presentation/screens/holidays_calendar_screen.dart",
+          "line": 1,
+          "end_line": 20,
+          "label": "holidays"
+        }
+      ]
+    },
+    {
+      "id": "apply-leave",
+      "type": "frontend",
+      "label": "Apply leave",
+      "sublabel": "ApplyLeaveSheet",
+      "pos": [
+        40,
+        260
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "tag": "sheet",
+      "sources": [
+        {
+          "path": "lib/shared/bottom_sheets/leave_sheets/apply_leave_sheet.dart",
+          "line": 17,
+          "end_line": 30,
+          "label": "apply"
+        }
+      ]
+    },
+    {
+      "id": "leave-detail",
+      "type": "frontend",
+      "label": "Leave detail",
+      "sublabel": "LeaveDetailSheet",
+      "pos": [
+        40,
+        380
+      ],
+      "size": [
+        140,
+        62
+      ],
+      "tag": "sheet",
+      "sources": [
+        {
+          "path": "lib/shared/bottom_sheets/leave_sheets/leave_detail_sheet.dart",
+          "line": 1,
+          "end_line": 40,
+          "label": "detail"
+        }
+      ]
     }
   ],
+  "boundaries": [],
   "connections": [
-    { "id": "nav-clock", "from": "employee-nav", "to": "clock", "label": "Clock", "fromSide": "top", "toSide": "bottom" },
-    { "id": "nav-att", "from": "employee-nav", "to": "attendance", "label": "Attendance", "fromSide": "top", "toSide": "bottom" },
-    { "id": "nav-alerts", "from": "employee-nav", "to": "alerts", "label": "Alerts", "fromSide": "top", "toSide": "bottom" },
-    { "id": "nav-more", "from": "employee-nav", "to": "more", "label": "More", "fromSide": "top", "toSide": "bottom" },
-    { "id": "clock-loc", "from": "clock", "to": "location-sheet", "label": "change location", "variant": "dashed", "fromSide": "bottom", "toSide": "top" },
-    { "id": "att-details", "from": "attendance", "to": "details-sheet", "label": "day tap", "variant": "dashed", "fromSide": "bottom", "toSide": "top" },
-    { "id": "att-add", "from": "attendance", "to": "add-sheet", "label": "add / edit", "variant": "dashed" },
-    { "id": "att-holiday", "from": "attendance", "to": "holiday-sheet", "label": "holiday day", "variant": "dashed" },
-    { "id": "att-month", "from": "attendance", "to": "month-picker", "label": "change month", "variant": "dashed", "fromSide": "bottom", "toSide": "top" }
+    {
+      "id": "nav-clock",
+      "from": "employee-nav",
+      "to": "clock",
+      "label": "Clock",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "nav-att",
+      "from": "employee-nav",
+      "to": "attendance",
+      "label": "Attendance",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "nav-alerts",
+      "from": "employee-nav",
+      "to": "alerts",
+      "label": "Alerts",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "nav-more",
+      "from": "employee-nav",
+      "to": "more",
+      "label": "More",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "clock-loc",
+      "from": "clock",
+      "to": "location-sheet",
+      "label": "change location",
+      "variant": "dashed"
+    },
+    {
+      "id": "att-details",
+      "from": "attendance",
+      "to": "details-sheet",
+      "label": "day tap",
+      "variant": "dashed"
+    },
+    {
+      "id": "att-add",
+      "from": "attendance",
+      "to": "add-sheet",
+      "label": "add / edit",
+      "variant": "dashed"
+    },
+    {
+      "id": "att-holiday",
+      "from": "attendance",
+      "to": "holiday-sheet",
+      "label": "holiday day",
+      "variant": "dashed"
+    },
+    {
+      "id": "att-month",
+      "from": "attendance",
+      "to": "month-picker",
+      "label": "change month",
+      "variant": "dashed"
+    },
+    {
+      "id": "clock-leaves",
+      "from": "clock",
+      "to": "leaves-hub",
+      "label": "Leaves card",
+      "variant": "emphasis"
+    },
+    {
+      "id": "hub-hist",
+      "from": "leaves-hub",
+      "to": "leave-history",
+      "label": "history"
+    },
+    {
+      "id": "hub-types",
+      "from": "leaves-hub",
+      "to": "leave-types",
+      "label": "types"
+    },
+    {
+      "id": "hub-hol",
+      "from": "leaves-hub",
+      "to": "holidays",
+      "label": "holidays"
+    },
+    {
+      "id": "hub-apply",
+      "from": "leaves-hub",
+      "to": "apply-leave",
+      "label": "apply",
+      "variant": "dashed"
+    },
+    {
+      "id": "hub-det",
+      "from": "leaves-hub",
+      "to": "leave-detail",
+      "label": "row tap",
+      "variant": "dashed"
+    }
   ],
   "cards": [
     {
@@ -158,6 +476,15 @@
       "items": [
         "Tabs are full screens inside the shell",
         "Location / details / add / holiday open as bottom sheets"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Leaves",
+      "items": [
+        "ClockLeavesCard \u2192 LeavesScreen",
+        "History / types / holidays are pushed screens",
+        "Apply + detail open as bottom sheets"
       ]
     }
   ]

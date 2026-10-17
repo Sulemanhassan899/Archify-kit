@@ -3,26 +3,52 @@
   "diagram_type": "architecture",
   "meta": {
     "title": "Obecno Manager Module Screens",
-    "subtitle": "Overview hub, directories, attendance, and employee sheets",
+    "subtitle": "Overview hub, directories, attendance, and team leaves",
     "output": "manager-screens.html",
     "quality_profile": "showcase",
     "repository": {
       "url": "https://github.com/Sulemanhassan899/obecno.git",
       "provider": "github",
-      "revision": "674dbc537595bdbcaba8142674b813cf27ffe7d2"
+      "revision": "77242d1796dab8196266fe0ccdccf4e0a266687b",
+      "link_mode": "local-only"
     },
     "views": [
       {
         "id": "tabs",
         "label": "Five tabs",
-        "focus": ["manager-nav", "overview", "clock", "attendance", "alerts", "more"],
+        "focus": [
+          "manager-nav",
+          "overview",
+          "clock",
+          "attendance",
+          "alerts",
+          "more"
+        ],
         "note": "Manager shell adds Overview before Clock"
       },
       {
         "id": "directories",
         "label": "People & places",
-        "focus": ["overview", "all-employees", "all-locations", "add-employee", "add-location"],
+        "focus": [
+          "overview",
+          "all-employees",
+          "all-locations",
+          "add-employee",
+          "add-location"
+        ],
         "note": "Overview actions open directories and create sheets"
+      },
+      {
+        "id": "leaves",
+        "label": "Leaves",
+        "focus": [
+          "overview",
+          "team-leaves",
+          "my-leaves",
+          "mgr-leave-detail",
+          "leave-status-filter"
+        ],
+        "note": "Overview action tiles for team and personal leaves"
       }
     ]
   },
@@ -32,75 +58,143 @@
       "type": "frontend",
       "label": "Manager shell",
       "sublabel": "/manager_nav",
-      "pos": [560, 300],
-      "size": [148, 64],
+      "pos": [
+        560,
+        300
+      ],
+      "size": [
+        148,
+        64
+      ],
       "tag": "bottom nav",
-      "sources": [{ "path": "lib/widgets/bottom_nav_bars/manager_nav.dart", "line": 63, "end_line": 69, "label": "tab screens" }]
+      "sources": [
+        {
+          "path": "lib/widgets/bottom_nav_bars/manager_nav.dart",
+          "line": 63,
+          "end_line": 69,
+          "label": "tab screens"
+        }
+      ]
     },
     {
       "id": "overview",
       "type": "frontend",
       "label": "Overview",
-      "sublabel": "tab 0 · stats + actions",
-      "pos": [120, 120],
-      "size": [140, 64]
+      "sublabel": "tab 0 \u00b7 stats + actions",
+      "pos": [
+        120,
+        120
+      ],
+      "size": [
+        140,
+        64
+      ]
     },
     {
       "id": "clock",
       "type": "frontend",
       "label": "Clock",
-      "sublabel": "tab 1 · manager punch",
-      "pos": [320, 120],
-      "size": [140, 64]
+      "sublabel": "tab 1 \u00b7 manager punch",
+      "pos": [
+        320,
+        120
+      ],
+      "size": [
+        140,
+        64
+      ]
     },
     {
       "id": "attendance",
       "type": "frontend",
       "label": "Team attendance",
-      "sublabel": "tab 2 · filters",
-      "pos": [520, 120],
-      "size": [148, 64]
+      "sublabel": "tab 2 \u00b7 filters",
+      "pos": [
+        520,
+        120
+      ],
+      "size": [
+        148,
+        64
+      ]
     },
     {
       "id": "alerts",
       "type": "frontend",
       "label": "Alerts",
       "sublabel": "tab 3",
-      "pos": [740, 120],
-      "size": [128, 64]
+      "pos": [
+        740,
+        120
+      ],
+      "size": [
+        128,
+        64
+      ]
     },
     {
       "id": "more",
       "type": "frontend",
       "label": "More",
-      "sublabel": "tab 4 · profile hub",
-      "pos": [940, 120],
-      "size": [128, 64]
+      "sublabel": "tab 4 \u00b7 profile hub",
+      "pos": [
+        940,
+        120
+      ],
+      "size": [
+        128,
+        64
+      ]
     },
     {
       "id": "all-employees",
       "type": "frontend",
       "label": "All employees",
       "sublabel": "/manager/employees",
-      "pos": [120, 460],
-      "size": [148, 64],
-      "sources": [{ "path": "lib/core/routes/app_routes.dart", "line": 67, "end_line": 69, "label": "route" }]
+      "pos": [
+        120,
+        460
+      ],
+      "size": [
+        148,
+        64
+      ],
+      "sources": [
+        {
+          "path": "lib/core/routes/app_routes.dart",
+          "line": 67,
+          "end_line": 69,
+          "label": "route"
+        }
+      ]
     },
     {
       "id": "all-locations",
       "type": "frontend",
       "label": "All locations",
       "sublabel": "/manager/locations",
-      "pos": [340, 460],
-      "size": [148, 64]
+      "pos": [
+        340,
+        460
+      ],
+      "size": [
+        148,
+        64
+      ]
     },
     {
       "id": "add-location",
       "type": "frontend",
       "label": "New location",
       "sublabel": "NewLocationSheet",
-      "pos": [560, 460],
-      "size": [140, 62],
+      "pos": [
+        560,
+        460
+      ],
+      "size": [
+        140,
+        62
+      ],
       "tag": "sheet"
     },
     {
@@ -108,8 +202,14 @@
       "type": "frontend",
       "label": "Add employee",
       "sublabel": "AddEmployeeSheet",
-      "pos": [760, 460],
-      "size": [140, 62],
+      "pos": [
+        760,
+        460
+      ],
+      "size": [
+        140,
+        62
+      ],
       "tag": "sheet"
     },
     {
@@ -117,8 +217,14 @@
       "type": "frontend",
       "label": "Attendance details",
       "sublabel": "ManagerAttendanceDetailsSheet",
-      "pos": [520, 580],
-      "size": [170, 62],
+      "pos": [
+        520,
+        580
+      ],
+      "size": [
+        170,
+        62
+      ],
       "tag": "sheet"
     },
     {
@@ -126,8 +232,14 @@
       "type": "frontend",
       "label": "Employee profile",
       "sublabel": "ManagerEmployeeProfileSheet",
-      "pos": [120, 580],
-      "size": [170, 62],
+      "pos": [
+        120,
+        580
+      ],
+      "size": [
+        170,
+        62
+      ],
       "tag": "sheet"
     },
     {
@@ -135,37 +247,259 @@
       "type": "frontend",
       "label": "Location setup",
       "sublabel": "map + schedule screens",
-      "pos": [340, 580],
-      "size": [148, 62]
+      "pos": [
+        340,
+        580
+      ],
+      "size": [
+        148,
+        62
+      ]
+    },
+    {
+      "id": "team-leaves",
+      "type": "frontend",
+      "label": "Team leaves",
+      "sublabel": "TeamLeavesScreen",
+      "pos": [
+        1120,
+        120
+      ],
+      "size": [
+        148,
+        64
+      ],
+      "sources": [
+        {
+          "path": "lib/core/api/manager_api_endpoints.dart",
+          "line": 50,
+          "end_line": 53,
+          "label": "team-leaves API"
+        }
+      ]
+    },
+    {
+      "id": "my-leaves",
+      "type": "frontend",
+      "label": "My Leaves",
+      "sublabel": "LeavesScreen",
+      "pos": [
+        1120,
+        240
+      ],
+      "size": [
+        148,
+        64
+      ],
+      "sources": [
+        {
+          "path": "lib/features/employee_module/leaves/presentation/screens/leaves_screen.dart",
+          "line": 21,
+          "end_line": 28,
+          "label": "LeavesScreen"
+        }
+      ]
+    },
+    {
+      "id": "mgr-leave-detail",
+      "type": "frontend",
+      "label": "Manager leave detail",
+      "sublabel": "ManagerLeaveDetailSheet",
+      "pos": [
+        1120,
+        400
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "tag": "sheet",
+      "sources": [
+        {
+          "path": "lib/core/api/manager_api_endpoints.dart",
+          "line": 50,
+          "end_line": 53,
+          "label": "review API"
+        }
+      ]
+    },
+    {
+      "id": "leave-status-filter",
+      "type": "frontend",
+      "label": "Leave status filter",
+      "sublabel": "LeaveStatusFilterSheet",
+      "pos": [
+        1120,
+        540
+      ],
+      "size": [
+        160,
+        62
+      ],
+      "tag": "sheet",
+      "sources": [
+        {
+          "path": "lib/shared/bottom_sheets/leave_sheets/leave_status_filter_sheet.dart",
+          "line": 1,
+          "end_line": 30,
+          "label": "status filter"
+        }
+      ]
     }
   ],
   "boundaries": [
     {
       "kind": "region",
       "label": "Manager bottom navigation",
-      "wraps": ["manager-nav", "overview", "clock", "attendance", "alerts", "more"],
+      "wraps": [
+        "manager-nav",
+        "overview",
+        "clock",
+        "attendance",
+        "alerts",
+        "more"
+      ],
       "pad": 18
     },
     {
       "kind": "region",
       "label": "Directories & create flows from Overview",
-      "wraps": ["all-employees", "all-locations", "add-location", "add-employee", "emp-profile", "loc-setup"],
+      "wraps": [
+        "all-employees",
+        "all-locations",
+        "add-location",
+        "add-employee",
+        "emp-profile",
+        "loc-setup"
+      ],
       "pad": 14
     }
   ],
   "connections": [
-    { "id": "nav-ov", "from": "manager-nav", "to": "overview", "label": "Overview", "fromSide": "top", "toSide": "bottom" },
-    { "id": "nav-clock", "from": "manager-nav", "to": "clock", "label": "Clock", "fromSide": "top", "toSide": "bottom" },
-    { "id": "nav-att", "from": "manager-nav", "to": "attendance", "label": "Attendance", "fromSide": "top", "toSide": "bottom" },
-    { "id": "nav-alerts", "from": "manager-nav", "to": "alerts", "label": "Alerts", "fromSide": "top", "toSide": "bottom" },
-    { "id": "nav-more", "from": "manager-nav", "to": "more", "label": "More", "fromSide": "top", "toSide": "bottom" },
-    { "id": "ov-emps", "from": "overview", "to": "all-employees", "label": "All employees", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
-    { "id": "ov-locs", "from": "overview", "to": "all-locations", "label": "All locations", "fromSide": "bottom", "toSide": "top" },
-    { "id": "ov-add-loc", "from": "overview", "to": "add-location", "label": "Add Location", "variant": "dashed" },
-    { "id": "ov-add-emp", "from": "overview", "to": "add-employee", "label": "Add Employee", "variant": "dashed" },
-    { "id": "att-details", "from": "attendance", "to": "att-details", "label": "row tap", "variant": "dashed", "fromSide": "bottom", "toSide": "top" },
-    { "id": "emps-profile", "from": "all-employees", "to": "emp-profile", "label": "employee card", "variant": "dashed", "fromSide": "bottom", "toSide": "top" },
-    { "id": "locs-setup", "from": "all-locations", "to": "loc-setup", "label": "open location", "fromSide": "bottom", "toSide": "top" }
+    {
+      "id": "nav-ov",
+      "from": "manager-nav",
+      "to": "overview",
+      "label": "Overview",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "nav-clock",
+      "from": "manager-nav",
+      "to": "clock",
+      "label": "Clock",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "nav-att",
+      "from": "manager-nav",
+      "to": "attendance",
+      "label": "Attendance",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "nav-alerts",
+      "from": "manager-nav",
+      "to": "alerts",
+      "label": "Alerts",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "nav-more",
+      "from": "manager-nav",
+      "to": "more",
+      "label": "More",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "id": "ov-emps",
+      "from": "overview",
+      "to": "all-employees",
+      "label": "All employees",
+      "variant": "emphasis",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "ov-locs",
+      "from": "overview",
+      "to": "all-locations",
+      "label": "All locations",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "ov-add-loc",
+      "from": "overview",
+      "to": "add-location",
+      "label": "Add Location",
+      "variant": "dashed"
+    },
+    {
+      "id": "ov-add-emp",
+      "from": "overview",
+      "to": "add-employee",
+      "label": "Add Employee",
+      "variant": "dashed"
+    },
+    {
+      "id": "att-details",
+      "from": "attendance",
+      "to": "att-details",
+      "label": "row tap",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "emps-profile",
+      "from": "all-employees",
+      "to": "emp-profile",
+      "label": "employee card",
+      "variant": "dashed",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "locs-setup",
+      "from": "all-locations",
+      "to": "loc-setup",
+      "label": "open location",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "ov-team-leaves",
+      "from": "overview",
+      "to": "team-leaves",
+      "label": "Team Leaves",
+      "variant": "emphasis"
+    },
+    {
+      "id": "ov-my-leaves",
+      "from": "overview",
+      "to": "my-leaves",
+      "label": "My Leaves"
+    },
+    {
+      "id": "team-mgr-det",
+      "from": "team-leaves",
+      "to": "mgr-leave-detail",
+      "label": "row tap",
+      "variant": "dashed"
+    },
+    {
+      "id": "team-status",
+      "from": "team-leaves",
+      "to": "leave-status-filter",
+      "label": "filter",
+      "variant": "dashed"
+    }
   ],
   "cards": [
     {
@@ -182,7 +516,17 @@
       "items": [
         "All Employees and All Locations are pushed screens",
         "Add Employee / New Location open sheets from Overview",
-        "Employee profile sheet also opens from attendance details"
+        "Employee profile sheet also opens from attendance details",
+        "Team Leaves / My Leaves are Overview action tiles"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Leaves",
+      "items": [
+        "Team Leaves \u2192 TeamLeavesScreen",
+        "My Leaves \u2192 shared LeavesScreen",
+        "Review via ManagerLeaveDetailSheet"
       ]
     }
   ]
