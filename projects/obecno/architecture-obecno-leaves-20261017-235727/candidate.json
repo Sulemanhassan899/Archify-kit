@@ -1,0 +1,676 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Obecno Leaves Module",
+    "subtitle": "Employee hub, manager team leaves, shared sheets, and REST",
+    "output": "obecno-leaves.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/Sulemanhassan899/obecno.git",
+      "provider": "github",
+      "revision": "77242d1796dab8196266fe0ccdccf4e0a266687b",
+      "link_mode": "local-only"
+    },
+    "views": [
+      {
+        "id": "employee-path",
+        "label": "Employee leaves",
+        "focus": [
+          "clock-leaves",
+          "leaves-hub",
+          "leave-history",
+          "leave-types",
+          "holidays",
+          "apply-leave",
+          "leave-detail"
+        ],
+        "note": "Clock card \u2192 LeavesScreen \u2192 history / types / holidays / apply"
+      },
+      {
+        "id": "manager-path",
+        "label": "Manager team leaves",
+        "focus": [
+          "overview-actions",
+          "team-leaves",
+          "my-leaves",
+          "mgr-leave-detail",
+          "leave-status-filter"
+        ],
+        "note": "Overview tiles \u2192 TeamLeavesScreen review + My Leaves (shared hub)"
+      },
+      {
+        "id": "api-layer",
+        "label": "Leave APIs",
+        "focus": [
+          "leaves-service",
+          "overview-service",
+          "employee-api",
+          "manager-api"
+        ],
+        "note": "Employee /leaves* and manager /team-leaves*"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "clock-leaves",
+      "type": "frontend",
+      "label": "ClockLeavesCard",
+      "sublabel": "Clock tab entry",
+      "pos": [
+        80,
+        80
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "entry",
+      "sources": [
+        {
+          "path": "lib/features/clock/presentation/widgets/clock_leaves_card.dart",
+          "line": 11,
+          "end_line": 20,
+          "label": "push LeavesScreen"
+        }
+      ]
+    },
+    {
+      "id": "overview-actions",
+      "type": "frontend",
+      "label": "Overview actions",
+      "sublabel": "Team Leaves \u00b7 My Leaves",
+      "pos": [
+        420,
+        80
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "tag": "entry",
+      "sources": [
+        {
+          "path": "lib/features/manager_module/Manager_overview/presentation/widgets/overview_header.dart",
+          "line": 373,
+          "end_line": 382,
+          "label": "Overview action grid"
+        }
+      ]
+    },
+    {
+      "id": "day-overview",
+      "type": "frontend",
+      "label": "Day overview sheet",
+      "sublabel": "AttendanceDayOverviewSheet",
+      "pos": [
+        80,
+        520
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "tag": "sheet",
+      "sources": [
+        {
+          "path": "lib/shared/bottom_sheets/leave_sheets/attendance_day_overview_sheet.dart",
+          "line": 1,
+          "end_line": 30,
+          "label": "day overview sheet"
+        }
+      ]
+    },
+    {
+      "id": "leaves-hub",
+      "type": "frontend",
+      "label": "LeavesScreen",
+      "sublabel": "balances \u00b7 upcoming \u00b7 apply",
+      "pos": [
+        80,
+        260
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "sources": [
+        {
+          "path": "lib/features/employee_module/leaves/presentation/screens/leaves_screen.dart",
+          "line": 21,
+          "end_line": 48,
+          "label": "LeavesScreen hub"
+        }
+      ]
+    },
+    {
+      "id": "team-leaves",
+      "type": "frontend",
+      "label": "TeamLeavesScreen",
+      "sublabel": "requests \u00b7 usage bars",
+      "pos": [
+        420,
+        260
+      ],
+      "size": [
+        170,
+        64
+      ],
+      "sources": [
+        {
+          "path": "lib/core/api/manager_api_endpoints.dart",
+          "line": 50,
+          "end_line": 53,
+          "label": "team-leaves API"
+        }
+      ]
+    },
+    {
+      "id": "my-leaves",
+      "type": "frontend",
+      "label": "My Leaves",
+      "sublabel": "shared LeavesScreen",
+      "pos": [
+        680,
+        80
+      ],
+      "size": [
+        150,
+        64
+      ],
+      "sources": [
+        {
+          "path": "lib/features/employee_module/leaves/presentation/screens/leaves_screen.dart",
+          "line": 21,
+          "end_line": 28,
+          "label": "shared LeavesScreen"
+        }
+      ]
+    },
+    {
+      "id": "leave-history",
+      "type": "frontend",
+      "label": "Leave history",
+      "sublabel": "LeaveHistoryScreen",
+      "pos": [
+        80,
+        400
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "sources": [
+        {
+          "path": "lib/features/employee_module/leaves/presentation/screens/leave_history_screen.dart",
+          "line": 1,
+          "end_line": 30,
+          "label": "history screen"
+        }
+      ]
+    },
+    {
+      "id": "leave-types",
+      "type": "frontend",
+      "label": "Leave types",
+      "sublabel": "LeaveTypesScreen",
+      "pos": [
+        360,
+        400
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "sources": [
+        {
+          "path": "lib/features/employee_module/leaves/presentation/screens/leave_types_screen.dart",
+          "line": 1,
+          "end_line": 25,
+          "label": "types screen"
+        }
+      ]
+    },
+    {
+      "id": "holidays",
+      "type": "frontend",
+      "label": "Holidays calendar",
+      "sublabel": "HolidaysCalendarScreen",
+      "pos": [
+        720,
+        400
+      ],
+      "size": [
+        160,
+        62
+      ],
+      "sources": [
+        {
+          "path": "lib/features/employee_module/leaves/presentation/screens/holidays_calendar_screen.dart",
+          "line": 1,
+          "end_line": 20,
+          "label": "holidays screen"
+        }
+      ]
+    },
+    {
+      "id": "apply-leave",
+      "type": "frontend",
+      "label": "Apply leave",
+      "sublabel": "ApplyLeaveSheet",
+      "pos": [
+        80,
+        660
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "sheet",
+      "sources": [
+        {
+          "path": "lib/shared/bottom_sheets/leave_sheets/apply_leave_sheet.dart",
+          "line": 17,
+          "end_line": 30,
+          "label": "ApplyLeaveSheet"
+        }
+      ]
+    },
+    {
+      "id": "leave-detail",
+      "type": "frontend",
+      "label": "Leave detail",
+      "sublabel": "LeaveDetailSheet",
+      "pos": [
+        300,
+        660
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "sheet",
+      "sources": [
+        {
+          "path": "lib/shared/bottom_sheets/leave_sheets/leave_detail_sheet.dart",
+          "line": 1,
+          "end_line": 40,
+          "label": "LeaveDetailSheet"
+        }
+      ]
+    },
+    {
+      "id": "mgr-leave-detail",
+      "type": "frontend",
+      "label": "Manager leave detail",
+      "sublabel": "ManagerLeaveDetailSheet",
+      "pos": [
+        520,
+        660
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "tag": "sheet",
+      "sources": [
+        {
+          "path": "lib/core/api/manager_api_endpoints.dart",
+          "line": 50,
+          "end_line": 53,
+          "label": "team-leaves review API"
+        }
+      ]
+    },
+    {
+      "id": "leave-status-filter",
+      "type": "frontend",
+      "label": "Status filter",
+      "sublabel": "LeaveStatusFilterSheet",
+      "pos": [
+        740,
+        660
+      ],
+      "size": [
+        160,
+        62
+      ],
+      "tag": "sheet",
+      "sources": [
+        {
+          "path": "lib/shared/bottom_sheets/leave_sheets/leave_status_filter_sheet.dart",
+          "line": 1,
+          "end_line": 30,
+          "label": "status filter"
+        }
+      ]
+    },
+    {
+      "id": "leave-type-picker",
+      "type": "frontend",
+      "label": "Type picker",
+      "sublabel": "LeaveTypePickerSheet",
+      "pos": [
+        960,
+        660
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "tag": "sheet",
+      "sources": [
+        {
+          "path": "lib/shared/bottom_sheets/leave_sheets/leave_type_picker_sheet.dart",
+          "line": 1,
+          "end_line": 30,
+          "label": "type picker"
+        }
+      ]
+    },
+    {
+      "id": "history-date",
+      "type": "frontend",
+      "label": "History date range",
+      "sublabel": "LeaveHistoryDatePickerSheet",
+      "pos": [
+        80,
+        860
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "tag": "sheet",
+      "sources": [
+        {
+          "path": "lib/shared/bottom_sheets/leave_sheets/leave_history_date_picker_sheet.dart",
+          "line": 1,
+          "end_line": 40,
+          "label": "history date picker"
+        }
+      ]
+    },
+    {
+      "id": "leaves-service",
+      "type": "backend",
+      "label": "LeavesService",
+      "sublabel": "employee leave HTTP",
+      "pos": [
+        300,
+        860
+      ],
+      "size": [
+        150,
+        62
+      ],
+      "sources": [
+        {
+          "path": "lib/core/api/employee_api_endpoints.dart",
+          "line": 33,
+          "end_line": 36,
+          "label": "employee leaves paths"
+        }
+      ]
+    },
+    {
+      "id": "overview-service",
+      "type": "backend",
+      "label": "Overview service",
+      "sublabel": "loadTeamLeaves \u00b7 review",
+      "pos": [
+        740,
+        860
+      ],
+      "size": [
+        170,
+        62
+      ],
+      "sources": [
+        {
+          "path": "lib/core/api/manager_api_endpoints.dart",
+          "line": 445,
+          "end_line": 446,
+          "label": "teamLeaves constants"
+        }
+      ]
+    },
+    {
+      "id": "employee-api",
+      "type": "cloud",
+      "label": "Employee leave APIs",
+      "sublabel": "/employee/leaves*",
+      "pos": [
+        520,
+        860
+      ],
+      "size": [
+        160,
+        62
+      ],
+      "sources": [
+        {
+          "path": "lib/core/api/employee_api_endpoints.dart",
+          "line": 33,
+          "end_line": 56,
+          "label": "leaves + team-leaves"
+        }
+      ]
+    },
+    {
+      "id": "manager-api",
+      "type": "cloud",
+      "label": "Manager leave APIs",
+      "sublabel": "/manager/team-leaves*",
+      "pos": [
+        960,
+        860
+      ],
+      "size": [
+        160,
+        62
+      ],
+      "sources": [
+        {
+          "path": "lib/core/api/manager_api_endpoints.dart",
+          "line": 50,
+          "end_line": 53,
+          "label": "get/post team-leaves"
+        }
+      ]
+    }
+  ],
+  "boundaries": [],
+  "connections": [
+    {
+      "id": "clock-to-hub",
+      "from": "clock-leaves",
+      "to": "leaves-hub",
+      "label": "open leaves",
+      "variant": "emphasis"
+    },
+    {
+      "id": "ov-team",
+      "from": "overview-actions",
+      "to": "team-leaves",
+      "label": "Team Leaves",
+      "variant": "emphasis"
+    },
+    {
+      "id": "ov-my",
+      "from": "overview-actions",
+      "to": "my-leaves",
+      "label": "My Leaves"
+    },
+    {
+      "id": "hub-history",
+      "from": "leaves-hub",
+      "to": "leave-history",
+      "label": "history"
+    },
+    {
+      "id": "hub-types",
+      "from": "leaves-hub",
+      "to": "leave-types",
+      "label": "type list"
+    },
+    {
+      "id": "hub-apply",
+      "from": "leaves-hub",
+      "to": "apply-leave",
+      "label": "apply",
+      "variant": "dashed"
+    },
+    {
+      "id": "hub-holidays",
+      "from": "leaves-hub",
+      "to": "holidays",
+      "label": "open holidays"
+    },
+    {
+      "id": "hub-detail",
+      "from": "leaves-hub",
+      "to": "leave-detail",
+      "label": "row tap",
+      "variant": "dashed"
+    },
+    {
+      "id": "day-to-apply",
+      "from": "day-overview",
+      "to": "apply-leave",
+      "label": "apply for day",
+      "variant": "dashed"
+    },
+    {
+      "id": "team-types",
+      "from": "team-leaves",
+      "to": "leave-types",
+      "label": "types shortcut"
+    },
+    {
+      "id": "team-holidays",
+      "from": "team-leaves",
+      "to": "holidays",
+      "label": "holiday calendar"
+    },
+    {
+      "id": "team-mgr",
+      "from": "team-leaves",
+      "to": "mgr-leave-detail",
+      "label": "review",
+      "variant": "dashed"
+    },
+    {
+      "id": "team-filter",
+      "from": "team-leaves",
+      "to": "leave-status-filter",
+      "label": "status filter",
+      "variant": "dashed"
+    },
+    {
+      "id": "hist-date",
+      "from": "leave-history",
+      "to": "history-date",
+      "label": "date range",
+      "variant": "dashed"
+    },
+    {
+      "id": "detail-apply",
+      "from": "leave-detail",
+      "to": "apply-leave",
+      "label": "edit",
+      "variant": "dashed"
+    },
+    {
+      "id": "mgr-apply",
+      "from": "mgr-leave-detail",
+      "to": "apply-leave",
+      "label": "edit / assign",
+      "variant": "dashed"
+    },
+    {
+      "id": "apply-picker",
+      "from": "apply-leave",
+      "to": "leave-type-picker",
+      "label": "pick type",
+      "variant": "dashed"
+    },
+    {
+      "id": "hub-svc",
+      "from": "leaves-hub",
+      "to": "leaves-service",
+      "label": "list \u00b7 balances"
+    },
+    {
+      "id": "apply-svc",
+      "from": "apply-leave",
+      "to": "leaves-service",
+      "label": "apply"
+    },
+    {
+      "id": "team-svc",
+      "from": "team-leaves",
+      "to": "overview-service",
+      "label": "loadTeamLeaves"
+    },
+    {
+      "id": "mgr-svc",
+      "from": "mgr-leave-detail",
+      "to": "overview-service",
+      "label": "review"
+    },
+    {
+      "id": "svc-emp-api",
+      "from": "leaves-service",
+      "to": "employee-api",
+      "label": "REST",
+      "variant": "emphasis"
+    },
+    {
+      "id": "svc-mgr-api",
+      "from": "overview-service",
+      "to": "manager-api",
+      "label": "REST",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Employee path",
+      "items": [
+        "ClockLeavesCard opens LeavesScreen",
+        "Hub \u2192 history, types, holidays, ApplyLeaveSheet",
+        "Attendance day overview can open apply for that day"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Manager path",
+      "items": [
+        "Overview Team Leaves \u2192 TeamLeavesScreen (worktree UI)",
+        "Overview My Leaves \u2192 LeavesScreen (shared employee hub)",
+        "TeamLeavesScreen \u2192 ManagerLeaveDetailSheet + status filter"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "API surface",
+      "items": [
+        "Employee: /employee/leaves, balances, types, apply (at HEAD)",
+        "Manager: /manager/team-leaves + /review (at HEAD)",
+        "Untracked UI: Manager_leaves/, manager_leave_detail_sheet, LeavesService"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Worktree note",
+      "items": [
+        "Pinned revision 77242d1 \u2014 employee leave screens exist",
+        "Manager_leaves + LeavesService are local uncommitted paths",
+        "Diagram topology matches the current worktree product surface"
+      ]
+    }
+  ]
+}

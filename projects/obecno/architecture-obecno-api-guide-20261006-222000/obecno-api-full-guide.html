@@ -192,13 +192,13 @@
     .frame-viewport {
       position: relative;
       width: 100%;
-      height: clamp(280px, 62vh, 820px);
+      height: clamp(360px, 78vh, 1100px);
       overflow: auto;
       background: #000;
       overscroll-behavior: contain;
     }
     .frame-wrap.frame-runtime .frame-viewport {
-      height: clamp(300px, 68vh, 900px);
+      height: clamp(360px, 82vh, 1100px);
     }
     .frame-scaler {
       transform-origin: 0 0;
@@ -209,8 +209,8 @@
     }
     .frame-wrap iframe {
       display: block;
-      width: 1400px;
-      height: 900px;
+      width: 1500px;
+      height: 1100px;
       border: 0;
       background: var(--bg);
     }
@@ -219,11 +219,11 @@
     }
     @media (max-width: 960px) {
       .frame-viewport { height: clamp(240px, 55vh, 640px); }
-      .frame-wrap iframe { width: 1100px; height: 760px; }
+      .frame-wrap iframe { width: 1300px; height: 960px; }
     }
     @media (max-width: 640px) {
       .frame-viewport { height: clamp(220px, 50vh, 520px); }
-      .frame-wrap iframe { width: 900px; height: 640px; }
+      .frame-wrap iframe { width: 1100px; height: 820px; }
     }
     .api-grid-wrap {
       margin-top: 0.85rem;
@@ -329,6 +329,7 @@
     <a href="#screens-auth">Launch &amp; auth</a>
     <a href="#screens-employee">Employee</a>
     <a href="#screens-manager">Manager</a>
+    <a href="#screens-leaves">Leaves</a>
     <a href="#screens-more">More / settings</a>
     <div class="group">Detailed / API maps</div>
     <a href="#auth">Auth APIs</a>
@@ -421,7 +422,7 @@
           </div>
         </div>
       </div>
-      <div class="api-grid-wrap" data-catalog-keys="shell,clock,attendance,alerts,more,loc-sheet,day-sheet,add-sheet,holiday,month">
+      <div class="api-grid-wrap" data-catalog-keys="shell,clock,attendance,alerts,more,loc-sheet,day-sheet,add-sheet,holiday,month,clock-leaves,leaves-hub,leave-history,leave-types,holidays,apply-leave,leave-detail,day-overview,history-date">
         <h3>APIs &amp; sheets · employee screens</h3>
         <div class="api-grid"></div>
       </div>
@@ -445,8 +446,33 @@
           </div>
         </div>
       </div>
-      <div class="api-grid-wrap" data-catalog-keys="shell,overview,clock,attendance,alerts,more,add-emp,add-loc,all-emp,all-loc,emp-profile,emp-att,emp-locs,emp-devices,emp-timing,loc-overview,loc-setup,loc-map,att-details,status-filter,loc-filter">
+      <div class="api-grid-wrap" data-catalog-keys="shell,overview,clock,attendance,alerts,more,add-emp,add-loc,all-emp,all-loc,emp-profile,emp-att,emp-locs,emp-devices,emp-timing,loc-overview,loc-setup,loc-map,att-details,status-filter,loc-filter,overview-actions,team-leaves,my-leaves,mgr-leave-detail,leave-status-filter,apply-leave,leaves-hub">
         <h3>APIs &amp; sheets · manager screens</h3>
+        <div class="api-grid"></div>
+      </div>
+    </section>
+
+
+    <section class="diagram" id="screens-leaves">
+      <div class="section-head">
+        <h2>Screen flow · Leaves</h2>
+        <p>Employee hub, manager team leaves, shared sheets &amp; REST · enhanced/leaves.html</p>
+      </div>
+      <div class="frame-wrap" data-zoom-root>
+        <div class="frame-toolbar" aria-label="Diagram zoom">
+          <button type="button" class="zoom-btn" data-zoom-out title="Zoom out" aria-label="Zoom out">−</button>
+          <span class="zoom-label" data-zoom-label>100%</span>
+          <button type="button" class="zoom-btn" data-zoom-in title="Zoom in" aria-label="Zoom in">+</button>
+          <button type="button" class="zoom-fit" data-zoom-fit title="Fit to screen">Fit</button>
+        </div>
+        <div class="frame-viewport" data-zoom-viewport>
+          <div class="frame-scaler" data-zoom-scaler>
+            <iframe title="Leaves module" src="enhanced/leaves.html?theme=dark&amp;embed=1" loading="lazy" referrerpolicy="same-origin"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="api-grid-wrap" data-catalog-keys="clock-leaves,overview-actions,leaves-hub,team-leaves,my-leaves,leave-history,leave-types,holidays,apply-leave,leave-detail,mgr-leave-detail,leave-status-filter,leave-type-picker,day-overview,history-date,leaves-service,overview-service,employee-api,manager-api">
+        <h3>APIs &amp; sheets · leaves module</h3>
         <div class="api-grid"></div>
       </div>
     </section>

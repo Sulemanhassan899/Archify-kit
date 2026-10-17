@@ -128,8 +128,10 @@ window.OBECNO_SCREEN_CATALOG = {
     ],
     sheets: [
       { name: "LocationBottomSheet", purpose: "Pick which office/location the punch applies to." },
-      { name: "ClockAttendanceDetailsSheet", purpose: "Inspect a punch event from the clock card (when opened)." }
-    ]
+      { name: "ClockAttendanceDetailsSheet", purpose: "Inspect a punch event from the clock card (when opened)." },
+      { name: "ClockLeavesCard", purpose: "Summary card that navigates to LeavesScreen." }
+    ],
+    notes: "Leaves entry is a pushed screen (LeavesScreen), not a sheet."
   },
   attendance: {
     title: "Attendance / Team attendance",
@@ -219,6 +221,209 @@ window.OBECNO_SCREEN_CATALOG = {
     ]
   },
 
+
+  // —— Leaves module ——
+  "clock-leaves": {
+    title: "Clock leaves card",
+    purpose: "Clock-tab card that opens the employee Leaves hub.",
+    apis: [
+      { method: "GET", path: "/api/v1/employee/leaves/balances", purpose: "Show remaining leave balance on the card when loaded." }
+    ],
+    sheets: [],
+    notes: "Pushes LeavesScreen via MaterialPageRoute."
+  },
+  "overview-actions": {
+    title: "Overview leave actions",
+    purpose: "Manager Overview tiles for Team Leaves and My Leaves.",
+    apis: [
+      { method: "GET", path: "/api/v1/manager/dashboard", purpose: "Overview seed may include pending team leave counts." },
+      { method: "GET", path: "/api/v1/manager/team-leaves", purpose: "Team leave list used after opening Team Leaves." }
+    ],
+    sheets: [
+      { name: "NewLocationSheet", purpose: "Add Location tile." },
+      { name: "AddEmployeeSheet", purpose: "Add Employee tile." }
+    ],
+    notes: "Team Leaves → TeamLeavesScreen; My Leaves → LeavesScreen."
+  },
+  "leaves-hub": {
+    title: "Leaves hub",
+    purpose: "Employee LeavesScreen — balances, upcoming requests, apply.",
+    apis: [
+      { method: "GET", path: "/api/v1/employee/leaves", purpose: "List leave requests." },
+      { method: "GET", path: "/api/v1/employee/leaves/balances", purpose: "Remaining balances by type." },
+      { method: "GET", path: "/api/v1/employee/leaves/types", purpose: "Available leave types." },
+      { method: "POST", path: "/api/v1/employee/leaves/apply", purpose: "Submit a new leave request (fallback POST /employee/leaves)." }
+    ],
+    sheets: [
+      { name: "ApplyLeaveSheet", purpose: "Create or edit a leave request." },
+      { name: "LeaveDetailSheet", purpose: "Inspect one request from the hub list." }
+    ]
+  },
+  "team-leaves": {
+    title: "Team leaves",
+    purpose: "Manager TeamLeavesScreen — pending/approved team requests and usage bars.",
+    apis: [
+      { method: "GET", path: "/api/v1/manager/team-leaves", purpose: "Load filtered team leave requests." },
+      { method: "POST", path: "/api/v1/manager/team-leaves/review", purpose: "Approve or reject a request." },
+      { method: "GET", path: "/api/v1/manager/employees/{id}/leave-balances", purpose: "Usage bars / balances per employee when shown." }
+    ],
+    sheets: [
+      { name: "ManagerLeaveDetailSheet", purpose: "Review, approve, reject, or edit a team leave." },
+      { name: "LeaveStatusFilterSheet", purpose: "Filter by leave status." },
+      { name: "LocationsFilterSheet", purpose: "Filter by location." }
+    ],
+    notes: "Also links to LeaveTypesScreen and HolidaysCalendarScreen."
+  },
+  "my-leaves": {
+    title: "My Leaves",
+    purpose: "Manager Overview shortcut into the shared LeavesScreen.",
+    apis: [
+      { method: "GET", path: "/api/v1/employee/leaves", purpose: "Same employee leave list APIs as Leaves hub." },
+      { method: "GET", path: "/api/v1/employee/leaves/balances", purpose: "Balances for the signed-in manager acting as employee." }
+    ],
+    sheets: [
+      { name: "ApplyLeaveSheet", purpose: "Apply leave for self." },
+      { name: "LeaveDetailSheet", purpose: "Open own request detail." }
+    ]
+  },
+  "leave-history": {
+    title: "Leave history",
+    purpose: "LeaveHistoryScreen — past requests with date-range filter.",
+    apis: [
+      { method: "GET", path: "/api/v1/employee/leaves", purpose: "History list with optional date_from / date_to / status." }
+    ],
+    sheets: [
+      { name: "LeaveHistoryDatePickerSheet", purpose: "Pick or clear a history date range." },
+      { name: "LeaveDetailSheet", purpose: "Open a historical request." }
+    ]
+  },
+  "leave-types": {
+    title: "Leave types",
+    purpose: "LeaveTypesScreen — catalog of company leave types.",
+    apis: [
+      { method: "GET", path: "/api/v1/employee/leaves/types", purpose: "Fetch leave type definitions." }
+    ],
+    sheets: []
+  },
+  holidays: {
+    title: "Holidays calendar",
+    purpose: "HolidaysCalendarScreen — company holiday markers.",
+    apis: [
+      { method: "GET", path: "/api/v1/employee/calendar", purpose: "Calendar / holiday markers." },
+      { method: "GET", path: "/api/v1/employee/company-calendar", purpose: "Company calendar when used." }
+    ],
+    sheets: []
+  },
+  "apply-leave": {
+    title: "Apply leave sheet",
+    purpose: "ApplyLeaveSheet — create or edit leave (employee or manager-on-behalf).",
+    apis: [
+      { method: "GET", path: "/api/v1/employee/leaves/types", purpose: "Populate type picker." },
+      { method: "POST", path: "/api/v1/employee/leaves/apply", purpose: "Submit leave." },
+      { method: "POST", path: "/api/v1/manager/employees/{id}/leaves", purpose: "Manager assign leave for an employee when applicable." }
+    ],
+    sheets: [
+      { name: "LeaveTypePickerSheet", purpose: "Choose leave type." }
+    ]
+  },
+  "leave-detail": {
+    title: "Leave detail sheet",
+    purpose: "LeaveDetailSheet — employee view of one request.",
+    apis: [
+      { method: "GET", path: "/api/v1/employee/leaves", purpose: "Request payload already in list; refresh after edits." }
+    ],
+    sheets: [
+      { name: "ApplyLeaveSheet", purpose: "Edit the request when allowed." }
+    ]
+  },
+  "mgr-leave-detail": {
+    title: "Manager leave detail",
+    purpose: "ManagerLeaveDetailSheet — approve / reject / edit team leave.",
+    apis: [
+      { method: "POST", path: "/api/v1/manager/team-leaves/review", purpose: "Approve or reject." },
+      { method: "GET", path: "/api/v1/manager/employees/{id}/leaves", purpose: "Employee leave context when opened from attendance." }
+    ],
+    sheets: [
+      { name: "ApplyLeaveSheet", purpose: "Edit / assign leave from the review sheet." }
+    ]
+  },
+  "leave-status-filter": {
+    title: "Leave status filter",
+    purpose: "LeaveStatusFilterSheet for TeamLeavesScreen.",
+    apis: [],
+    sheets: [
+      { name: "LeaveStatusFilterSheet", purpose: "Filter pending / approved / rejected / etc." }
+    ]
+  },
+  "leave-type-picker": {
+    title: "Leave type picker",
+    purpose: "LeaveTypePickerSheet used by ApplyLeaveSheet.",
+    apis: [
+      { method: "GET", path: "/api/v1/employee/leaves/types", purpose: "Types listed in the picker." }
+    ],
+    sheets: [
+      { name: "LeaveTypePickerSheet", purpose: "Select a leave type." }
+    ]
+  },
+  "day-overview": {
+    title: "Attendance day overview",
+    purpose: "AttendanceDayOverviewSheet bridges attendance day → apply leave.",
+    apis: [
+      { method: "GET", path: "/api/v1/employee/attendance/details", purpose: "Day punches / leave markers." }
+    ],
+    sheets: [
+      { name: "ApplyLeaveSheet", purpose: "Apply leave for the selected day." },
+      { name: "LeaveDetailSheet", purpose: "Open leave covering that day when present." }
+    ]
+  },
+  "history-date": {
+    title: "History date range",
+    purpose: "LeaveHistoryDatePickerSheet for LeaveHistoryScreen.",
+    apis: [],
+    sheets: [
+      { name: "LeaveHistoryDatePickerSheet", purpose: "Choose start/end or clear range." }
+    ]
+  },
+  "leaves-service": {
+    title: "LeavesService",
+    purpose: "Employee leave HTTP repository (list, balances, types, apply).",
+    apis: [
+      { method: "GET", path: "/api/v1/employee/leaves", purpose: "List." },
+      { method: "GET", path: "/api/v1/employee/leaves/balances", purpose: "Balances." },
+      { method: "GET", path: "/api/v1/employee/leaves/types", purpose: "Types." },
+      { method: "POST", path: "/api/v1/employee/leaves/apply", purpose: "Apply." }
+    ],
+    sheets: []
+  },
+  "overview-service": {
+    title: "Manager overview leave APIs",
+    purpose: "loadTeamLeaves / reviewTeamLeave via manager overview service.",
+    apis: [
+      { method: "GET", path: "/api/v1/manager/team-leaves", purpose: "Team leave list." },
+      { method: "POST", path: "/api/v1/manager/team-leaves/review", purpose: "Review action." }
+    ],
+    sheets: []
+  },
+  "employee-api": {
+    title: "Employee leave endpoints",
+    purpose: "Declared EmployeeApiEndpoints leave + team-leaves paths.",
+    apis: [
+      { method: "GET/POST", path: "/api/v1/employee/leaves*", purpose: "leaves, balances, types, apply." },
+      { method: "GET/POST", path: "/api/v1/employee/team-leaves*", purpose: "Legacy/alternate team leave review paths." }
+    ],
+    sheets: []
+  },
+  "manager-api": {
+    title: "Manager leave endpoints",
+    purpose: "ManagerEmployeeApiEndpoints team-leaves and per-employee leave routes.",
+    apis: [
+      { method: "GET", path: "/api/v1/manager/team-leaves", purpose: "Team leave inbox." },
+      { method: "POST", path: "/api/v1/manager/team-leaves/review", purpose: "Approve / reject." },
+      { method: "GET/POST", path: "/api/v1/manager/employees/{id}/leaves", purpose: "Per-employee leaves." }
+    ],
+    sheets: []
+  },
+
   // —— Manager ——
   overview: {
     title: "Overview",
@@ -232,7 +437,8 @@ window.OBECNO_SCREEN_CATALOG = {
     sheets: [
       { name: "NewLocationSheet", purpose: "Start creating a location from Overview." },
       { name: "AddEmployeeSheet", purpose: "Invite / add an employee from Overview." }
-    ]
+    ],
+    notes: "Action grid also pushes TeamLeavesScreen and LeavesScreen (My Leaves)."
   },
   "add-emp": {
     title: "Add employee",
@@ -516,104 +722,4 @@ window.OBECNO_SCREEN_CATALOG = {
     sheets: [],
     notes: "Always clears local tokens; then GoRouter → /onboarding."
   }
-,
-  "clock-details": {
-    title: "Clock punch detail",
-    purpose: "Inspect a single punch event from the Clock tab.",
-    apis: [
-      { method: "GET", path: "/api/v1/employee/attendance", purpose: "Event data already loaded for today; sheet is primarily local presentation." }
-    ],
-    sheets: [
-      { name: "ClockAttendanceDetailsSheet", purpose: "Show punch type, time, and location context." }
-    ]
-  },
-  "edit-history": {
-    title: "Edit history",
-    purpose: "Show prior attendance edit requests for a day.",
-    apis: [
-      { method: "GET", path: "/api/v1/employee/attendance/details", purpose: "Includes edit-request history in the day payload." }
-    ],
-    sheets: [],
-    notes: "Opened from AttendanceDetailsSheet, not a separate route."
-  },
-  "edit-field": {
-    title: "Edit account field",
-    purpose: "Edit one profile field (name, phone, etc.).",
-    apis: [
-      { method: "PUT/PATCH", path: "/api/v1/employee/profile", purpose: "Save the updated field." }
-    ],
-    sheets: [
-      { name: "EditAccountFieldSheet", purpose: "Single-field editor sheet." }
-    ]
-  },
-  "time-picker": {
-    title: "Reminder time picker",
-    purpose: "Choose reminder clock time.",
-    apis: [],
-    sheets: [
-      { name: "ReminderTimePickerSheet", purpose: "Local time picker; schedules native notifications." }
-    ]
-  },
-  "duration-picker": {
-    title: "Reminder duration picker",
-    purpose: "Choose reminder window / duration.",
-    apis: [],
-    sheets: [
-      { name: "ReminderDurationPickerSheet", purpose: "Local duration picker." }
-    ]
-  },
-  "invite-sent": {
-    title: "Invite sent",
-    purpose: "Confirm an employee invite was sent.",
-    apis: [],
-    sheets: [
-      { name: "InviteSentDialog", purpose: "Success confirmation after invite POST." }
-    ]
-  },
-  "add-members": {
-    title: "Add members",
-    purpose: "Assign employees to a new or existing location.",
-    apis: [
-      { method: "POST", path: "/api/v1/manager/locations/{id}/members", purpose: "Attach selected employees to the location." }
-    ],
-    sheets: [
-      { name: "AddMembersSheet", purpose: "Member multi-select sheet." }
-    ]
-  },
-  "account-info": {
-    title: "Account information sheet",
-    purpose: "Manager view/edit of an employee’s account fields.",
-    apis: [
-      { method: "GET", path: "/api/v1/manager/employees/{id}", purpose: "Load employee fields." },
-      { method: "PUT/PATCH", path: "/api/v1/manager/employees/{id}", purpose: "Save edits." }
-    ],
-    sheets: [
-      { name: "AccountInformationSheet", purpose: "Account fields + edit field sheet." },
-      { name: "EditAccountFieldSheet", purpose: "Edit one field." }
-    ]
-  },
-  "schedule-sheets": {
-    title: "Schedule sheets",
-    purpose: "Check-in window, working days, and break timing for an employee.",
-    apis: [
-      { method: "PUT/PATCH", path: "/api/v1/manager/employees/{id}", purpose: "Persist schedule fields." }
-    ],
-    sheets: [
-      { name: "CheckInOutTimingSheet", purpose: "Check-in / out times." },
-      { name: "WorkingDaysSheet", purpose: "Working days." },
-      { name: "BreakTimingSheet", purpose: "Break timing." }
-    ]
-  },
-  "mgr-add": {
-    title: "Manager add / edit punch",
-    purpose: "Correct a team member’s attendance from details.",
-    apis: [
-      { method: "GET", path: "/api/v1/manager/team-attendance/edit", purpose: "Load edit form." },
-      { method: "POST", path: "/api/v1/manager/team-attendance/edit/save", purpose: "Save correction." }
-    ],
-    sheets: [
-      { name: "AddAttendanceBottomSheet", purpose: "Punch editor used by managers too." }
-    ]
-  },
-
 };
